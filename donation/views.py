@@ -193,122 +193,122 @@ def donated_list_donor(request,id):
     return render(request, 'donation/donated_list.html', {'donor':donor, 'donates':donates})
 
 
-#drf
-from .models import *
-from .serializers import *
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import generics
-from rest_framework import mixins
-from rest_framework.authentication import SessionAuthentication,TokenAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-from django.http import HttpResponse, JsonResponse
-from rest_framework.parsers import JSONParser
-
-#ngos
-class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,
-                     mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
-                     mixins.DestroyModelMixin):
-    serializer_class = NgoSerializer
-    queryset = Ngos.objects.all()
-    lookup_field = 'user_id'
-    #authentication_classes = [SessionAuthentication, BasicAuthentication]
-    #authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    def get(self, request, user_id=None):
-        if user_id:
-            return self.retrieve(request)
-        else:
-            return self.list(request)
-    def post(self, request,user_id=None):
-        return self.create(request, user_id)
-    def put(self, request, user_id=None):
-        return self.update(request,user_id)
-    def delete(self, request, user_id):
-        return self.destroy(request, user_id)
-
-class NgoAPIView(APIView):
-    def get(self, request):
-        ngos = Ngos.objects.all()
-        serializer = NgoSerializer(ngos, many=True)
-        return Response(serializer.data)
-    def post(self, request):
-        serializer = NgoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class NgoDetails(APIView):
-    def get_object(self, id):
-        try:
-            return Ngos.objects.get(user_id=id)
-        except Ngos.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-    def get(self, request, id):
-        ngo = self.get_object(id)
-        serializer = NgoSerializer(ngo)
-        return Response(serializer.data)
-    def put(self, request, id):
-        ngo = self.get_object(id)
-        serializer = NgoSerializer(ngo, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, id):
-        ngo = self.get_object(id)
-        ngo.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-#donors
-class DonorAPIView(APIView):
-    def get(self, request):
-        donors = Donors.objects.all()
-        serializer = DonorSerializer(donors, many=True)
-        return Response(serializer.data)
-    def post(self, request):
-        serializer = DonorSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class DonorDetails(APIView):
-    def get_object(self, id):
-        try:
-            return Donors.objects.get(user_id=id)
-        except Donors.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-    def get(self, request, id):
-        donor = self.get_object(id)
-        serializer = DonorSerializer(donor)
-        return Response(serializer.data)
-    def put(self, request, id):
-        donor = self.get_object(id)
-        serializer = DonorSerializer(donor, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, id):
-        donor = self.get_object(id)
-        donor.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-#reqs
-class ReqAPIView(APIView):
-    def get(self, request):
-        reqs = Requirements.objects.all()
-        serializer = ReqSerializer(reqs, many=True)
-        return Response(serializer.data)
-    def post(self, request):
-        serializer = ReqSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# #drf
+# from .models import *
+# from .serializers import *
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from rest_framework import status
+# from rest_framework.views import APIView
+# from rest_framework import generics
+# from rest_framework import mixins
+# from rest_framework.authentication import SessionAuthentication,TokenAuthentication, BasicAuthentication
+# from rest_framework.permissions import IsAuthenticated
+# from django.shortcuts import get_object_or_404
+# from rest_framework import viewsets
+# from django.http import HttpResponse, JsonResponse
+# from rest_framework.parsers import JSONParser
+#
+# #ngos
+# class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,
+#                      mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
+#                      mixins.DestroyModelMixin):
+#     serializer_class = NgoSerializer
+#     queryset = Ngos.objects.all()
+#     lookup_field = 'user_id'
+#     #authentication_classes = [SessionAuthentication, BasicAuthentication]
+#     #authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+#     def get(self, request, user_id=None):
+#         if user_id:
+#             return self.retrieve(request)
+#         else:
+#             return self.list(request)
+#     def post(self, request,user_id=None):
+#         return self.create(request, user_id)
+#     def put(self, request, user_id=None):
+#         return self.update(request,user_id)
+#     def delete(self, request, user_id):
+#         return self.destroy(request, user_id)
+#
+# class NgoAPIView(APIView):
+#     def get(self, request):
+#         ngos = Ngos.objects.all()
+#         serializer = NgoSerializer(ngos, many=True)
+#         return Response(serializer.data)
+#     def post(self, request):
+#         serializer = NgoSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+# class NgoDetails(APIView):
+#     def get_object(self, id):
+#         try:
+#             return Ngos.objects.get(user_id=id)
+#         except Ngos.DoesNotExist:
+#             return Response(status=status.HTTP_404_NOT_FOUND)
+#     def get(self, request, id):
+#         ngo = self.get_object(id)
+#         serializer = NgoSerializer(ngo)
+#         return Response(serializer.data)
+#     def put(self, request, id):
+#         ngo = self.get_object(id)
+#         serializer = NgoSerializer(ngo, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def delete(self, request, id):
+#         ngo = self.get_object(id)
+#         ngo.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+#
+# #donors
+# class DonorAPIView(APIView):
+#     def get(self, request):
+#         donors = Donors.objects.all()
+#         serializer = DonorSerializer(donors, many=True)
+#         return Response(serializer.data)
+#     def post(self, request):
+#         serializer = DonorSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+# class DonorDetails(APIView):
+#     def get_object(self, id):
+#         try:
+#             return Donors.objects.get(user_id=id)
+#         except Donors.DoesNotExist:
+#             return Response(status=status.HTTP_404_NOT_FOUND)
+#     def get(self, request, id):
+#         donor = self.get_object(id)
+#         serializer = DonorSerializer(donor)
+#         return Response(serializer.data)
+#     def put(self, request, id):
+#         donor = self.get_object(id)
+#         serializer = DonorSerializer(donor, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def delete(self, request, id):
+#         donor = self.get_object(id)
+#         donor.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+#
+# #reqs
+# class ReqAPIView(APIView):
+#     def get(self, request):
+#         reqs = Requirements.objects.all()
+#         serializer = ReqSerializer(reqs, many=True)
+#         return Response(serializer.data)
+#     def post(self, request):
+#         serializer = ReqSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
