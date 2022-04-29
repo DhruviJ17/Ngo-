@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from drf.views import donor
 from .models import Requirements, Donate
 from main.models import *
 from .forms import *
@@ -99,17 +101,19 @@ def tabular(request, pk):
 
 @ donor_user_required
 def user_requirements(request, pk):
-    object_list = Requirements.objects.all()
-    paginator = Paginator(object_list, 6)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
+    donor = request.user.donor
+    object_list = Requirements.objects.filter(ngo__city = donor.city)
+    categories = ['Medicine', 'Food', 'Clothing', 'Stationary']
+    # paginator = Paginator(object_list, 6)
+    # page = request.GET.get('page')
+    # try:
+    #     posts = paginator.page(page)
+    # except PageNotAnInteger:
+    #     posts = paginator.page(1)
+    # except EmptyPage:
+    #     posts = paginator.page(paginator.num_pages)
 
-    context = {'page': page, 'posts': posts}
+    context = {'object_list':object_list, 'categories':categories}
     return render(request, 'main/user.html', context)
 
 

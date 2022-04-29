@@ -22,6 +22,7 @@ class Ngo(models.Model):
     address = models.CharField(max_length=500, null=True)
     # usi api for states
     state = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
     # logo
     logo = models.ImageField(null=True, blank=True, default='ngo.jpg')
 
@@ -36,6 +37,7 @@ class Donor(models.Model):
         User, on_delete=models.CASCADE, primary_key=True, unique=True)
     contact_number = models.IntegerField(null=True)
     email = models.EmailField(max_length=200, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
     # location details
     # address = models.CharField(max_length=500, null=True)
     # usi api for states

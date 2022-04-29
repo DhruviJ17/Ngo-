@@ -32,6 +32,11 @@ class NgoSignUpForm(UserCreationForm):
                                                           #   'class': 'border-md',
                                                           #   'class': 'pl-3',
                                                           'placeholder': 'State'}))
+    city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             #   'class': 'bg-white',
+                                                             #   'class': 'border-left-0',
+                                                             #   'class': 'border-md',
+                                                                      'placeholder': 'City'}))
     address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                             # 'class': 'bg-white',
                                                             # 'class': 'border-left-0',
@@ -100,6 +105,12 @@ class DonorSignUpForm(UserCreationForm):
                                                             # 'class': 'border-left-0',
                                                             # 'class': 'border-md',
                                                             'placeholder': 'E-mail     '}))
+    city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                              #   'class': 'bg-white',
+                                                              #   'class': 'border-left-0',
+                                                              #   'class': 'border-md',
+                                                              #   #   'class': 'pl-3',
+                                                              'placeholder': 'City'}))
     # state = forms.CharField()
     # address = forms.CharField()
     # logo
@@ -137,6 +148,7 @@ class DonorSignUpForm(UserCreationForm):
         donor.name_user = self.cleaned_data.get('name_user')
         donor.contact_number = self.cleaned_data.get('contact_number')
         donor.email = self.cleaned_data.get('email')
+        donor.city = self.cleaned_data.get('city')
         # donor.address = self.cleaned_data.get('address')
         # donor.state = self.cleaned_data.get('state')
         # if self.cleaned_data.get('logo') is not None:

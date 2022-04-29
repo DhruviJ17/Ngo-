@@ -123,3 +123,10 @@ def ngos(df):
 # for ind in df.index:
 # print(df['ngo_name'][0])
 
+import random
+
+def assign_randomCIty(city_list):
+    Ngos = Ngo.objects.all()
+    for ngo in Ngos:
+        ngo.city = random.choice(city_list)
+        ngo.save()

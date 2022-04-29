@@ -1,3 +1,4 @@
+from sre_parse import CATEGORIES
 from django.db import models
 from login.models import *
 
@@ -10,17 +11,18 @@ from login.models import *
 
 
 class Requirements(models.Model):
-    category = [
-        ('medicine', 'medicine'),
-        ('equipment', 'equipment'),
-    ]
+    CATEGORIES= (
+        ('M', 'Medicine'),
+        ('F', 'Food'),
+        ('C', 'Clothing'),
+        ('S', 'Stationary')
+    )
 
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
-    category = models.CharField(max_length=20, choices=category, blank=True, null=True)
-    initial_count = models.FloatField(blank=True, null=True)
-    donation_count = models.FloatField(default=0, blank=True, null=True)
-
+    category = models.CharField(max_length=20, choices=CATEGORIES, blank=True, null=True)
+    quantity = models.FloatField(blank=True, null=True)
+    
     def __str__(self):
         return self.name
 

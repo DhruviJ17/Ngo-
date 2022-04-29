@@ -59,16 +59,32 @@
 
     <!-- Projects Section -->
     <section class="project py-5">
-        <div class="container">
-            <div class="row my-3">
-                <div class="col-10 mx-auto text-center">
-                    <h1 class='text-uppercase'>Our Latest Projects</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quod, dicta repellendus
-                        suscipit saepe quam.</p>
+            <div class="container">
+                <div class="row my-3">
+                    <div class="col-10 mx-auto text-center">
+                        <h1 class='text-uppercase'>Our Latest Projects</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quod, dicta repellendus
+                            suscipit saepe quam.</p>
+                    </div>
+                <div class="row">                    
+                    {% for category in categories %}
+                    <div class="col-lg-4 mt-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            {% with 'images/'|add:category|add:'.jpg' as image_static %}
+                            <img src="{% static image_static %}" alt="Avatar" style="width:100%">
+                            {% endwith %}
+                            <div class="container">
+                                <h4><b>{{category}}</b></h4>
+                                <p>Check Requiremetns</p>
+                            </div>
+                        </div>
+                    </div>
+                        {% endfor %}
                 </div>
             </div>
+            
             <!--  -->
-            <div class="row">
+            <!-- <div class="row">
                 <!-- single project -->
                 {% for post in posts %}
                 <div class="col-10 col-md-6 col-lg-4">
@@ -100,11 +116,11 @@
                     </h6> -->
                 </div>
                 {% endfor %}
-            </div>
+            </div> -->
         </div>
     </section>
 
-    {% include 'main/pagination.html' with page=posts %}
+    <!-- {% include 'main/pagination.html' with page=posts %} -->
 
 
     <script src="alert.js"></script>

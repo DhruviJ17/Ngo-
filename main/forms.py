@@ -10,18 +10,18 @@ class RequirementsForm(ModelForm):
             {'class': 'form-control', 'placeholder': 'Enter Product'})
         self.fields['category'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Choose Category'})
-        self.fields['initial_count'].widget.attrs.update(
+        self.fields['quantity'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Enter Quantity'})
 
     class Meta:
         model = Requirements
-        fields = ['name', 'category', 'initial_count']
+        fields = ['name', 'category', 'quantity']
 
 
 class Count(ModelForm):
     class Meta:
         model = Requirements
-        fields = ['donation_count']
+        fields = ['quantity']
 
 
 class DonationForm(ModelForm):

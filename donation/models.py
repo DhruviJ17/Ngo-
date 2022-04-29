@@ -28,13 +28,15 @@ class Ngos(models.Model):
         return self.name
 
 class Requirements(models.Model):
-    CATEGORY = (
-        ('done', 'done'),
-        ('undone', 'undone'),
+    CATEGORIES= (
+        ('M', 'Medicine'),
+        ('F', 'Food'),
+        ('C', 'Clothing'),
+        ('S', 'Stationary'),
     )
     ngo = models.ForeignKey(Ngos, null=True, blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=20, choices=CATEGORIES, blank=True, null=True)
     quantity = models.FloatField()
     donated_quantity = models.IntegerField(null=True)
 
