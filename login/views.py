@@ -149,3 +149,4 @@ def assign_randomCIty(city_list):
     for ngo in Ngos:
         ngo.city = random.choice(city_list)
         ngo.save()
+

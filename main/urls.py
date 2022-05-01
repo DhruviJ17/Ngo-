@@ -12,5 +12,6 @@ urlpatterns = [
     path('user/<str:pk>', views.user_requirements, name='user'),
     path('user/<str:pk>/<str:cat>', views.user_requirements_category, name='user_category'),
     path('donation/<str:pk>', views.donation, name='donation'),
+    path('chat', views.chat, name='chat'),
     # path('logout', views.logoutUser, name='logout'),
 ]

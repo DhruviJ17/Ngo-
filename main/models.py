@@ -38,3 +38,14 @@ class Donate(models.Model):
 
     def __str__(self):
         return str(self.requirements_name)
+
+
+class Message(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    text = models.TextField()
+    to_user = models.ForeignKey(
+        User, blank=True, null=True, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # class Meta:
+    #     ordering = ['from_user', '-created_at', 'to_user']

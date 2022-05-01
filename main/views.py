@@ -167,3 +167,7 @@ def ngo_list(request):
     ngos = Ngo.objects.all()
     context = {'ngo_list':ngos}
     return render(request, 'main/ngo.html', context)
+
+
+def chat(request):
+    return render(request, 'main/chat.html')
