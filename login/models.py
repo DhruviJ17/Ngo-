@@ -29,7 +29,7 @@ class Ngo(models.Model):
 
 
     def __str__(self):
-        return self.ngo_name
+        return str(self.ngo_name)
 
 
 class Donor(models.Model):

@@ -22,7 +22,7 @@ class Requirements(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORIES, blank=True, null=True)
     quantity = models.FloatField(blank=True, null=True)
-    
+
     def __str__(self):
         return self.name
 
