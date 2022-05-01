@@ -12,10 +12,10 @@ from login.models import *
 
 class Requirements(models.Model):
     CATEGORIES= (
-        ('M', 'Medicine'),
-        ('F', 'Food'),
-        ('C', 'Clothing'),
-        ('S', 'Stationary')
+        ('Medicine', 'Medicine'),
+        ('Food', 'Food'),
+        ('Clothing', 'Clothing'),
+        ('Stationary', 'Stationary')
     )
 
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE, blank=True, null=True)

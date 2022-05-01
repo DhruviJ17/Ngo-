@@ -29,10 +29,10 @@ class Ngos(models.Model):
 
 class Requirements(models.Model):
     CATEGORIES= (
-        ('M', 'Medicine'),
-        ('F', 'Food'),
-        ('C', 'Clothing'),
-        ('S', 'Stationary'),
+        ('Medicine', 'Medicine'),
+        ('Food', 'Food'),
+        ('Clothing', 'Clothing'),
+        ('Stationary', 'Stationary'),
     )
     ngo = models.ForeignKey(Ngos, null=True, blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

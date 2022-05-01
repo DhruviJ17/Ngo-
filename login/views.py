@@ -101,19 +101,38 @@ def create_user(n):
 
 # import pandas as pd
 # df = pd.read_csv("ngo1.csv", sep=',')
-#
+# #
+# def ngos(df):
+#     cnt = 1
+#     for i in User.objects.all():
+#         ngo = Ngo()
+#         ngo.user = i
+#         ngo.ngo_name = df['ngo_name'][cnt]
+#         # ngo.contact_number = df['contact_number'][cnt]
+#         ngo.email = df['email'][cnt]
+#         ngo.address = df['address'][cnt]
+#         ngo.state = df['state'][cnt]
+#         ngo.aim = df['']
+#         ngo.save()
+#         cnt+=1
+
 def ngos(df):
-    cnt = 1
-    for i in User.objects.all():
-        ngo = Ngo()
-        ngo.user = i
-        ngo.ngo_name = df['ngo_name'][cnt]
+    for i in range(1, 430):
+        username = 'username{}'.format(i)
+        x = User.objects.get_or_create(username=username)
+        x = x[0]
+        x.set_password('Password@123')
+        x.is_ngo=True
+        x.save()
+        print(x.id)
+        ngo = Ngo.objects.create(user=x)
+        ngo.ngo_name = df['Name'][i]
         # ngo.contact_number = df['contact_number'][cnt]
-        ngo.email = df['email'][cnt]
-        ngo.address = df['address'][cnt]
-        ngo.state = df['state'][cnt]
+        ngo.email = df['Email'][i]
+        ngo.address = df['Address'][i]
+        ngo.state = 'Maharashtra'
+        ngo.aim = df['Aim/Objective'][i]
         ngo.save()
-        cnt+=1
 
 # ngos(df)
 #

@@ -113,8 +113,17 @@ def user_requirements(request, pk):
     # except EmptyPage:
     #     posts = paginator.page(paginator.num_pages)
 
-    context = {'object_list':object_list, 'categories':categories}
+    context = {'object_list':object_list, 'categories':categories, 'user_id':pk}
     return render(request, 'main/user.html', context)
+
+def user_requirements_category(request, pk, cat):
+    donor = request.user.donor
+    print(donor, donor.city,"=======================")
+    print(cat)
+    object_list = Requirements.objects.filter(ngo__city = donor.city).filter(category=cat)
+    print(object_list)
+    context = {'object_list':object_list}
+    return render(request, 'main/user_requirements.html', context=context)
 
 
 # def ngo_summary(request, pk):
@@ -152,3 +161,9 @@ def donation(request, pk):
                 return HttpResponse("Donation count exceeded Donation count")
     context = {'req': req, 'form': form}
     return render(request, 'main/donation.html', context)
+
+
+def ngo_list(request):
+    ngos = Ngo.objects.all()
+    context = {'ngo_list':ngos}
+    return render(request, 'main/ngo.html', context)

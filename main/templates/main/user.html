@@ -43,6 +43,7 @@
             </button>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item text-white"><button class="btn btn-outline-primary btn-lg"><a class="text-white">Ngos</a></button></li>
                     <li class="nav-item text-white"><button class="btn btn-outline-primary btn-lg">
                             <a href='{% url "logout" %}' class="text-white">
                                 Logout
@@ -75,7 +76,8 @@
                             {% endwith %}
                             <div class="container">
                                 <h4><b>{{category}}</b></h4>
-                                <p>Check Requiremetns</p>
+
+                                <button type="button" class="btn btn-primary"><a href='{% url "main:user_category" user_id category %}'>Requirements</a></button>
                             </div>
                         </div>
                     </div>

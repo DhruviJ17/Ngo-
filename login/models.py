@@ -22,12 +22,14 @@ class Ngo(models.Model):
     address = models.CharField(max_length=500, null=True)
     # usi api for states
     state = models.CharField(max_length=200, null=True)
+    aim = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=200, blank=True, null=True)
     # logo
     logo = models.ImageField(null=True, blank=True, default='ngo.jpg')
 
+
     def __str__(self):
-        return str(self.user)
+        return self.ngo_name
 
 
 class Donor(models.Model):
